@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring PlayMySongs</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/indexController.js" defer></script>
+</head>
+<body>
+<section class="hero">
+    <div class="hero__overlay"></div>
+
+    <header class="topbar">
+        <div>
+            <p class="brand">Spring PlayMySongs</p>
+            <h1>Gerencie suas músicas em uma interface moderna e direta.</h1>
+            <p class="subtitle">
+                Envie arquivos mp3, organize os dados da faixa e acesse o módulo de busca com uma home page mais completa.
+            </p>
+
+            <div class="hero__actions">
+                <a class="btn btn--primary" href="cadastroMusica.html">Enviar música</a>
+                <a class="btn btn--secondary" href="#modulos">Ver módulos</a>
+            </div>
+        </div>
+
+        <div class="hero__card">
+            <span class="badge">Projeto FC III</span>
+            <h2>Painel inicial</h2>
+            <p>
+                Layout pensado para destacar cadastro, busca, formatos aceitos e uma sugestão dinâmica na página inicial.
+            </p>
+            <div class="hero__stats">
+                <div>
+                    <strong>MP3</strong>
+                    <span>Formato principal</span>
+                </div>
+                <div>
+                    <strong>2 módulos</strong>
+                    <span>Upload e busca</span>
+                </div>
+                <div>
+                    <strong>HTML5</strong>
+                    <span>Base simples</span>
+                </div>
+            </div>
+        </div>
+    </header>
+</section>
+
+<main class="content">
+    <section class="section section--highlight" id="modulos">
+        <div class="section__title">
+            <p class="eyebrow">Home Page</p>
+            <h2>Escolha o que deseja fazer</h2>
+        </div>
+
+        <div class="cards">
+            <article class="card">
+                <span class="card__icon">↑</span>
+                <h3>Envio de músicas</h3>
+                <p>
+                    Cadastre nome da música, artista, estilo e selecione o arquivo mp3 para envio ao servidor.
+                </p>
+                <a class="card__link" href="cadastroMusica.html">Ir para cadastro</a>
+            </article>
+
+            <article class="card">
+                <span class="card__icon">⌕</span>
+                <h3>Busca de músicas</h3>
+                <p>
+                    Área reservada para consultar músicas por nome, estilo ou artista e tocar o áudio encontrado.
+                </p>
+                <a class="card__link" href="#">Abrir busca</a>
+            </article>
+
+            <article class="card">
+                <span class="card__icon">♪</span>
+                <h3>Destaque do sistema</h3>
+                <p>
+                    A home pode apresentar uma faixa sugerida para dar mais vida ao projeto logo na entrada.
+                </p>
+                <button class="card__button" type="button" onclick="trocarSugestao()">Trocar sugestão</button>
+            </article>
+        </div>
+    </section>
+
+    <section class="section grid">
+        <article class="panel">
+            <p class="eyebrow">Sugestão do dia</p>
+            <h2>Faixa em destaque</h2>
+            <div id="filme-sugerido" class="suggestion-box"></div>
+        </article>
+
+        <article class="panel">
+            <p class="eyebrow">Requisitos</p>
+            <h2>Resumo rápido</h2>
+            <ul class="feature-list">
+                <li>Upload de arquivos no padrão mp3</li>
+                <li>Cadastro com nome, autor e estilo</li>
+                <li>Busca posterior com reprodução em áudio</li>
+                <li>Página inicial com acesso direto aos módulos</li>
+            </ul>
+        </article>
+    </section>
+</main>
+</body>
+</html>

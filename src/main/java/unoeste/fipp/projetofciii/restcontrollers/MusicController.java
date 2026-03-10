@@ -1,0 +1,63 @@
+package unoeste.fipp.projetofciii.restcontrollers;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import unoeste.fipp.projetofciii.entities.Erro;
+import unoeste.fipp.projetofciii.entities.Music;
+
+import java.io.File;
+
+@RestController
+@RequestMapping("apis")
+public class MusicController
+{
+    @GetMapping("test")
+    public ResponseEntity<Object> teste()
+    {
+        return ResponseEntity.ok().build(); // retorna só o status, no caso, 200 (ok = deu certo)
+    }
+
+    @PostMapping("music-upload")
+    public ResponseEntity<Object> music_upload(String nomeMusica, String nomeAutor, String estilo, MultipartFile file){
+        final String UPLOAD_FOLDER = "src/main/resources/static/musicas/";
+        if(nomeMusica == null || nomeMusica.isEmpty()){
+            return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao nome da Musica"));
+        }
+        else{
+            if(nomeAutor == null || nomeAutor.isEmpty()){
+                return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao Autor"));
+            }
+            else{
+                if(estilo == null || estilo.isEmpty()){
+                    return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao estilo"));
+                }
+                else{
+                    Music music = new Music(nomeMusica, nomeAutor, estilo);
+                    if(file != null){
+                        String fileName = nomeMusica + "_" +  nomeAutor + "_" + estilo+".mp3";
+                        try {
+                            File uploadFolder = new  File(UPLOAD_FOLDER);
+                            if(!uploadFolder.exists()){
+                                uploadFolder.mkdir();
+                            }
+                            file.transferTo(new File(uploadFolder.getAbsolutePath() + "\\"+fileName));
+                        }catch(Exception e){
+                            System.out.println(e.getMessage());
+                        }
+                        music.setArquivo(fileName);
+                    }
+                    return ResponseEntity.ok().body(music);
+                }
+            }
+        }
+    }
+
+
+
+
+
+}

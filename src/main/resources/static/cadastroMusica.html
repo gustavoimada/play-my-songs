@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Músicas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/cadastroController.js" defer></script>
+</head>
+<body>
+<section class="hero hero--compact">
+    <div class="hero__overlay"></div>
+
+    <header class="topbar topbar--single">
+        <div>
+            <p class="brand">Spring PlayMySongs</p>
+            <h1>Envie uma nova música para o sistema.</h1>
+            <p class="subtitle">
+                Preencha os dados da faixa, selecione o arquivo mp3 e envie tudo em um fluxo simples e visualmente consistente com a home.
+            </p>
+
+            <div class="hero__actions">
+                <a class="btn btn--secondary" href="index.html">Voltar para início</a>
+            </div>
+        </div>
+    </header>
+</section>
+
+<main class="content">
+    <section class="section grid">
+        <article class="panel">
+            <p class="eyebrow">Cadastro</p>
+            <h2>Informações da música</h2>
+
+            <form class="music-form" method="post" enctype="multipart/form-data">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="nomeMusica">Nome da música</label>
+                        <input type="text" id="nomeMusica" name="nomeMusica" placeholder="Ex: Love My Life" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="nomeAutor">Nome do artista</label>
+                        <input type="text" id="nomeAutor" name="nomeAutor" placeholder="Ex: Robbie Williams" required>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="estilo">Estilo musical</label>
+                        <select id="estilo" name="estilo" required>
+                            <option value="">Selecione um estilo</option>
+                            <option value="pop">Pop</option>
+                            <option value="rock">Rock</option>
+                            <option value="sertanejo">Sertanejo</option>
+                            <option value="funk">Funk</option>
+                            <option value="rap">Rap</option>
+                            <option value="gospel">Gospel</option>
+                            <option value="mpb">MPB</option>
+                            <option value="eletronica">Eletrônica</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="file">Arquivo mp3</label>
+                        <input type="file" id="file" name="file" accept=".mp3,audio/mpeg" required>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn btn--primary" type="button" onclick="cadastrarMusica()">Cadastrar música</button>
+                </div>
+            </form>
+
+            <div id="mensagem-feedback" class="suggestion-box" style="display: none;"></div>
+        </article>
+
+        <article class="panel">
+            <p class="eyebrow">Orientações</p>
+            <h2>Antes de enviar</h2>
+            <ul class="feature-list">
+                <li>Use arquivos no formato `.mp3`</li>
+                <li>Preencha nome da música e do artista corretamente</li>
+                <li>Escolha um estilo para facilitar organização futura</li>
+                <li>Depois do envio, o backend retorna os dados cadastrados</li>
+            </ul>
+
+            <div class="suggestion-box" style="margin-top: 20px;">
+                <span class="badge">Exemplo</span>
+                <h3>lovemylife_pop_robbiewilliams.mp3</h3>
+                <p>Você pode usar esse padrão visualmente como referência para o nome final do arquivo salvo.</p>
+            </div>
+        </article>
+    </section>
+</main>
+</body>
+</html>
