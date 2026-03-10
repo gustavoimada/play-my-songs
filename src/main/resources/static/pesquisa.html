@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pesquisa de Músicas</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/pesquisaController.js" defer></script>
+</head>
+<body>
+<section class="hero hero--compact">
+    <div class="hero__overlay"></div>
+</section>
+
+<main class="content">
+    <section class="pesquisa-shell">
+        <article class="pesquisa-main">
+            <div class="cadastro-main__header cadastro-main__header--row">
+                <div>
+                    <p class="eyebrow">Busca principal</p>
+                    <h2>Pesquisar músicas</h2>
+                    <p class="pesquisa-main__text">
+                        Digite uma palavra-chave para procurar por nome da música, artista ou estilo.
+                    </p>
+                </div>
+
+                <a class="btn btn--secondary cadastro-main__back" href="index.html">Voltar para início</a>
+            </div>
+
+            <form class="search-form" onsubmit="pesquisarMusicas(event)">
+                <div class="search-form__row">
+                    <div class="search-form__group">
+                        <label for="palavraChave">Palavra-chave</label>
+                        <input
+                                type="text"
+                                id="palavraChave"
+                                name="palavraChave"
+                                placeholder="Ex: robbie, pop, love..."
+                                required
+                        >
+                    </div>
+
+                    <div class="search-form__actions">
+                        <button class="btn btn--primary btn--big" type="submit">
+                            Pesquisar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="pesquisa-feedback" class="suggestion-box feedback-box" style="display: none;"></div>
+            <div id="resultado-pesquisa" class="results-grid"></div>
+        </article>
+
+        <aside class="pesquisa-side">
+            <section class="pesquisa-side__section">
+                <p class="eyebrow">Como funciona</p>
+                <h2>O que pesquisar</h2>
+                <ul class="feature-list pesquisa-side__list">
+                    <li>Parte do nome da música</li>
+                    <li>Parte do nome do artista</li>
+                    <li>Parte do estilo musical</li>
+                    <li>Depois, escolha o resultado e dê play</li>
+                </ul>
+            </section>
+
+            <section class="pesquisa-side__section pesquisa-side__section--example">
+                <p class="eyebrow">Exemplo</p>
+                <h3>love</h3>
+                <p>Pode retornar músicas como “Love My Life” e outras faixas relacionadas ao termo informado.</p>
+            </section>
+        </aside>
+    </section>
+</main>
+</body>
+</html>
