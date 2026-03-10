@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.projetofciii.entities.Erro;
 import unoeste.fipp.projetofciii.entities.Music;
-
 import java.io.File;
 
 @RestController
@@ -22,42 +21,67 @@ public class MusicController
     }
 
     @PostMapping("music-upload")
-    public ResponseEntity<Object> music_upload(String nomeMusica, String nomeAutor, String estilo, MultipartFile file){
+    public ResponseEntity<Object> music_upload(String nomeMusica, String nomeAutor, String estilo, MultipartFile file)
+    {
         final String UPLOAD_FOLDER = "src/main/resources/static/musicas/";
-        if(nomeMusica == null || nomeMusica.isEmpty()){
-            return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao nome da Musica"));
+        if(nomeMusica == null || nomeMusica.isEmpty())
+        {
+            return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","Forneça o nome da Musica"));
         }
-        else{
-            if(nomeAutor == null || nomeAutor.isEmpty()){
-                return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao Autor"));
+        else
+        {
+            if(nomeAutor == null || nomeAutor.isEmpty())
+            {
+                return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","Forneça o nome do Artista"));
             }
-            else{
-                if(estilo == null || estilo.isEmpty()){
-                    return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Complete as informações relacionadas ao estilo"));
+            else
+            {
+                if(estilo == null || estilo.isEmpty())
+                {
+                    return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Forneça o estilo da Música"));
                 }
-                else{
-                    Music music = new Music(nomeMusica, nomeAutor, estilo);
-                    if(file != null){
-                        String fileName = nomeMusica + "_" +  nomeAutor + "_" + estilo+".mp3";
-                        try {
-                            File uploadFolder = new  File(UPLOAD_FOLDER);
-                            if(!uploadFolder.exists()){
-                                uploadFolder.mkdir();
-                            }
-                            file.transferTo(new File(uploadFolder.getAbsolutePath() + "\\"+fileName));
-                        }catch(Exception e){
-                            System.out.println(e.getMessage());
-                        }
-                        music.setArquivo(fileName);
+                else
+                {
+                    if(file == null || file.isEmpty())
+                    {
+                        return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","O campo do arquivo não foi completado!"));
                     }
-                    return ResponseEntity.ok().body(music);
+                    else
+                    {
+                        Music music = new Music(nomeMusica, nomeAutor, estilo);
+                            String fileName = nomeMusica + "_" +  nomeAutor + "_" + estilo+".mp3";
+                            try
+                            {
+                                File uploadFolder = new  File(UPLOAD_FOLDER);
+                                if(!uploadFolder.exists())
+                                {
+                                    uploadFolder.mkdir();
+                                }
+                                file.transferTo(new File(uploadFolder.getAbsolutePath() + "\\"+fileName));
+                            }
+                            catch(Exception e)
+                            {
+                                System.out.println(e.getMessage());
+                            }
+                            music.setArquivo(fileName);
+                        return ResponseEntity.ok().body(music);
+                    }
                 }
             }
         }
     }
 
+    @GetMapping("find-musics")
+    public ResponseEntity<Object> find_musics()
+    {
+        //
+        return ResponseEntity.ok("Lista de musicas");
+    }
 
-
-
-
+    @GetMapping("get-music-styles")
+    public ResponseEntity<Object> getStyles()
+    {
+        //
+        return ResponseEntity.ok("Lista de estilos musicais");
+    }
 }

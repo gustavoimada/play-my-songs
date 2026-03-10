@@ -3,19 +3,19 @@ const sugestoes = [
         titulo: "Love My Life",
         artista: "Robbie Williams",
         estilo: "Pop Internacional",
-        descricao: "Uma faixa conhecida para ilustrar como a música pode ser exibida em destaque na home."
+        descricao: "Uma faixa conhecida para ilustrar a sugestão principal da plataforma."
     },
     {
         titulo: "Tempo Perdido",
         artista: "Legião Urbana",
         estilo: "Rock Nacional",
-        descricao: "Exemplo de recomendação com foco em artista, estilo e experiência mais visual."
+        descricao: "Uma sugestão clássica para destacar artista, estilo e identidade visual."
     },
     {
         titulo: "Dias de Luta, Dias de Glória",
         artista: "Charlie Brown Jr.",
         estilo: "Rock",
-        descricao: "Outra sugestão para deixar a página inicial dinâmica sem depender do backend."
+        descricao: "Outra faixa para deixar a home mais viva e dinâmica logo na entrada."
     }
 ];
 

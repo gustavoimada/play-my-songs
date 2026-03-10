@@ -1,26 +1,5 @@
-/*
-function cadastrarMusica(){
-    const formMusica = document.forms[0];
-    const requestOptions = {
-        method: "POST",
-        body: new FormData(formMusica)
-    };
-
-    fetch("http://localhost:8080/music-upload", requestOptions)
-        .then(respone => {
-            if(response.status === 200){
-                return respone.json()
-                    .then(music =>{
-                        alert(music.nomeMusica + "Adicionado com sucesso")
-                    });
-            }
-            else{
-                alert("Erro ao adicionar musica");
-            }
-        })
-}
-*/
-function cadastrarMusica() {
+function cadastrarMusica()
+{
     const formMusica = document.forms[0];
     const feedback = document.getElementById("mensagem-feedback");
     const requestOptions = {
@@ -30,7 +9,8 @@ function cadastrarMusica() {
 
     fetch("http://localhost:8080/apis/music-upload", requestOptions)
         .then((response) => {
-            if (response.status === 200) {
+            if (response.status === 200)
+            {
                 return response.json().then((music) => {
                     feedback.style.display = "block";
                     feedback.innerHTML = `
@@ -48,8 +28,8 @@ function cadastrarMusica() {
                 feedback.style.display = "block";
                 feedback.innerHTML = `
                     <span class="badge">Erro</span>
-                    <h3>${erro.titulo || "Falha ao cadastrar"}</h3>
-                    <p>${erro.mensagem || "Verifique os dados enviados."}</p>
+                    <h3>${erro.title || "Falha ao cadastrar"}</h3>
+                    <p>${erro.descricao || "Verifique os dados enviados."}</p>
                 `;
             });
         })
@@ -61,4 +41,16 @@ function cadastrarMusica() {
                 <p>Não foi possível concluir o envio da música.</p>
             `;
         });
+}
+
+// só para ficar mais bonito no front end
+function mostrarNomeArquivo() {
+    const input = document.getElementById("file");
+    const fileName = document.getElementById("file-name");
+
+    if (input.files && input.files.length > 0) {
+        fileName.textContent = input.files[0].name;
+    } else {
+        fileName.textContent = "Nenhum arquivo selecionado";
+    }
 }

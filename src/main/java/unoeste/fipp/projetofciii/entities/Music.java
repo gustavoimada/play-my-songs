@@ -12,14 +12,6 @@ public class Music {
         this.estilo = estilo;
     }
 
-    public Music(String nomeMusica, String nomeAutor, String estilo, String arquivo)
-    {
-        this.nomeMusica = nomeMusica;
-        this.nomeAutor = nomeAutor;
-        this.estilo = estilo;
-        this.arquivo = arquivo;
-    }
-
     public String getNomeMusica() {
         return nomeMusica;
     }
