@@ -1,0 +1,18 @@
+COLOCANDO A PARTE DE BANCO DE DADOS
+
+1 rest controle -> 1 services (mas não precisa ser assim, fez dessa forma pq o sistema é muito simples)
+
+1. Criou um novo package services
+2. Criou uma classe MusicService
+3. Adicionou um @Service que é pra definir que aquela classe é um serviço
+4. No RestController, tem que criar uma variável que é um objeto para não ter que colocar static la no método do Service (bota AutoWired) 
+5. Colocar a dependência do mongoDB
+6. Olhar código do Service, é fazer a conexão, criar a collection etc...
+7. Aonde tem as **** é pq eu tive que colocar as dependências do Gson
+8. Por fim, criou uma variável ObjectId _id na classe de música, pq o banco cria essa chave primaria automatica
+
+SE BUGAR E NÃO TIVER CONECTANDO NO MONOGO:
+
+1 - Serviços
+2 - Procura o MongoDB e dá 2 cliques
+3 - Inicializa a conexão manualmente
