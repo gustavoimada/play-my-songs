@@ -1,113 +1,120 @@
-const mockMusicas = [
+/*
+function montarTabela(json) // esse json é uma lisat
+{
+    let tabela = "";
+    for (musica of json)
     {
-        nomeMusica: "Love My Life",
-        nomeAutor: "Robbie Williams",
-        estilo: "pop",
-        arquivo: "Teste_Henrique e Juliano_rap.mp3"
-    },
-    {
-        nomeMusica: "Teste",
-        nomeAutor: "Henrique e Juliano",
-        estilo: "rap",
-        arquivo: "Teste_Henrique e Juliano_rap.mp3"
-    },
-    {
-        nomeMusica: "Teste",
-        nomeAutor: "teste",
-        estilo: "rock",
-        arquivo: "Teste_teste_rock.mp3"
+        tabela += `<tr>
+            <td>${musica.nomeMusica}</td>
+            <td>${musica.nomeAutor}</td>
+            <td>${musica.estilo}</td>
+        </tr>`;
     }
-];
+    return tabela;
+}
 
-function pesquisarMusicas(event) {
-    event.preventDefault();
+function pesquisarMusicas()
+{
+    const musicas = document.getElementById('resultado');
+    const filtro = document.getElementById('palavraChave').value;
+    fetch("http://localhost:8080/apis/find-musics?keyWord="+filtro)
+        .then(response =>{
+            if(response.status === 200)
+                return response.json().
+                    then(json=>{
+                        musicas.innerHTML = montarTabela(json);
+                    })
+            else
+            {
+                alert("Não há resultados")
+            }
+        })
+        .catch(Error=>musicas.innerHTML = Error);
+}*/
 
-    const palavraChave = document.getElementById("palavraChave").value.trim();
-    const feedback = document.getElementById("pesquisa-feedback");
-    const container = document.getElementById("resultado-pesquisa");
+// acima tem o código de como se fosse fazer mesmo como fizemos no webFilmes
+// fiz um pouco diferente do que esta acima, mas abaixo tem literalmente a mesma logica
+// só não coloco o resultado em uma tabela, coloco numa div que fica mais bonito pro front
 
-    if (!palavraChave) {
-        feedback.style.display = "block";
-        feedback.innerHTML = `
-            <span class="badge">Atenção</span>
-            <h3>Campo obrigatório</h3>
-            <p>Digite uma palavra-chave para realizar a pesquisa.</p>
+function montarResultados(json) {
+    let html = "";
+
+    for (const musica of json)
+    {
+        // usou essa funcao só para substituir espacos/acentos
+        // no nome que iria quebrar a url e bugar dps
+        const arquivo = encodeURIComponent(musica.arquivo);
+
+        html += `
+            <article class="music-result">
+                <div class="music-result__meta">
+                    <span class="badge">Resultado</span>
+                    <h3>${musica.nomeMusica}</h3>
+                    <p><strong>Artista:</strong> ${musica.nomeAutor}</p>
+                    <p><strong>Estilo:</strong> ${musica.estilo}</p>
+                </div>
+
+                <div class="music-result__player">
+                    <p class="music-result__label">Ouvir música</p>
+                    <audio controls preload="none">
+                        <source src="musicas/${arquivo}" type="audio/mpeg">
+                        Seu navegador não suporta áudio.
+                    </audio>
+                </div>
+            </article>
         `;
-        container.innerHTML = "";
-        return;
     }
 
-    fetch(`http://localhost:8080/apis/find-musics?palavraChave=${encodeURIComponent(palavraChave)}`)
-        .then(async (response) => {
-            if (!response.ok) {
-                throw new Error("Falha na busca");
+    return html;
+}
+
+function pesquisarMusicas()
+{
+    const resultado = document.getElementById("resultado");
+    const feedback = document.getElementById("pesquisa-feedback");
+    const filtro = document.getElementById("palavraChave").value.trim();
+
+    fetch("http://localhost:8080/apis/find-musics?keyWord=" + filtro)
+        .then(response => {
+            if (response.status === 200)
+            {
+                return response.json().then(json => {
+                    feedback.style.display = "block";
+                    feedback.innerHTML = `
+                        <span class="badge">Pesquisa</span>
+                        <h3>${json.length} resultado(s)</h3>
+                        <p>Resultados para: <strong>${filtro}</strong></p>
+                    `;
+
+                    if (json.length === 0) {
+                        resultado.innerHTML = `
+                            <div class="empty-state">
+                                <h3>Nenhuma música encontrada</h3>
+                                <p>Tente pesquisar por nome da música, artista ou estilo.</p>
+                            </div>
+                        `;
+                    } else
+                    {
+                        resultado.innerHTML = montarResultados(json);
+                    }
+                });
+            } else {
+                feedback.style.display = "block";
+                feedback.innerHTML = `
+                    <span class="badge">Erro</span>
+                    <h3>Não foi possível pesquisar</h3>
+                    <p>Tente novamente.</p>
+                `;
+                resultado.innerHTML = "";
             }
-
-            const data = await response.json();
-
-            if (Array.isArray(data)) {
-                renderizarResultados(data, palavraChave);
-                return;
-            }
-
-            renderizarResultadosMock(palavraChave);
         })
         .catch(() => {
-            renderizarResultadosMock(palavraChave);
+            feedback.style.display = "block";
+            feedback.innerHTML = `
+                <span class="badge">Erro</span>
+                <h3>Servidor indisponível</h3>
+                <p>Não foi possível carregar as músicas.</p>
+            `;
+            resultado.innerHTML = "";
         });
-}
-
-function renderizarResultadosMock(palavraChave) {
-    const termo = palavraChave.toLowerCase();
-
-    const resultados = mockMusicas.filter((musica) => {
-        return (
-            musica.nomeMusica.toLowerCase().includes(termo) ||
-            musica.nomeAutor.toLowerCase().includes(termo) ||
-            musica.estilo.toLowerCase().includes(termo)
-        );
-    });
-
-    renderizarResultados(resultados, palavraChave);
-}
-
-function renderizarResultados(resultados, palavraChave) {
-    const feedback = document.getElementById("pesquisa-feedback");
-    const container = document.getElementById("resultado-pesquisa");
-
-    feedback.style.display = "block";
-
-    if (!resultados || resultados.length === 0) {
-        feedback.innerHTML = `
-            <span class="badge">Busca</span>
-            <h3>Nenhum resultado encontrado</h3>
-            <p>Nenhuma música corresponde ao termo "${palavraChave}".</p>
-        `;
-        container.innerHTML = "";
-        return;
-    }
-
-    feedback.innerHTML = `
-        <span class="badge">Resultados</span>
-        <h3>${resultados.length} música(s) encontrada(s)</h3>
-        <p>Exibindo ocorrências relacionadas a "${palavraChave}".</p>
-    `;
-
-    container.innerHTML = resultados.map((musica) => `
-        <article class="music-result">
-            <div class="music-result__meta">
-                <p class="eyebrow">Resultado</p>
-                <h3>${musica.nomeMusica}</h3>
-                <p><strong>Artista:</strong> ${musica.nomeAutor}</p>
-                <p><strong>Estilo:</strong> ${musica.estilo}</p>
-            </div>
-
-            <div class="music-result__player">
-                <audio controls preload="none">
-                    <source src="musicas/${musica.arquivo}" type="audio/mpeg">
-                    Seu navegador não suporta áudio HTML5.
-                </audio>
-            </div>
-        </article>
-    `).join("");
 }
