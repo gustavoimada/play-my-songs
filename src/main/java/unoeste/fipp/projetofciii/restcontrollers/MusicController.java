@@ -1,19 +1,24 @@
 package unoeste.fipp.projetofciii.restcontrollers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.projetofciii.entities.Erro;
 import unoeste.fipp.projetofciii.entities.Music;
+import unoeste.fipp.projetofciii.services.MusicService;
+
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("apis")
 public class MusicController
 {
+    @Autowired
+    private MusicService musicService;
+
     @GetMapping("test")
     public ResponseEntity<Object> teste()
     {
@@ -72,10 +77,11 @@ public class MusicController
     }
 
     @GetMapping("find-musics")
-    public ResponseEntity<Object> find_musics()
+    public ResponseEntity<Object> find_musics(String keyword )
     {
-        //
-        return ResponseEntity.ok("Lista de musicas");
+        List<Music> musicList = new ArrayList<>();
+        musicList = musicService.findMusicByKeyWord(keyword);
+        return ResponseEntity.ok().body(musicList);
     }
 
     @GetMapping("get-music-styles")
