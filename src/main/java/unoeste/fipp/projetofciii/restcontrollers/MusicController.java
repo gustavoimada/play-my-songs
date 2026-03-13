@@ -1,5 +1,6 @@
 package unoeste.fipp.projetofciii.restcontrollers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,12 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.projetofciii.entities.Erro;
 import unoeste.fipp.projetofciii.entities.Music;
+import unoeste.fipp.projetofciii.services.MusicService;
+
 import java.io.File;
 
 @RestController
 @RequestMapping("apis")
 public class MusicController
 {
+    @Autowired
+    private MusicService musicService;
+
     @GetMapping("test")
     public ResponseEntity<Object> teste()
     {
@@ -72,9 +78,10 @@ public class MusicController
     }
 
     @GetMapping("find-musics")
-    public ResponseEntity<Object> find_musics()
+    public ResponseEntity<Object> find_musics(String keyWord)
     {
-        //
+        // pedir á camada Service as músicas que satisfazem a música
+        musicService.findMusicsByKeyWord(keyWord);
         return ResponseEntity.ok("Lista de musicas");
     }
 
