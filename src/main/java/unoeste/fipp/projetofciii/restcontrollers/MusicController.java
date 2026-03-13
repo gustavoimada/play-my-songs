@@ -12,6 +12,8 @@ import unoeste.fipp.projetofciii.entities.Music;
 import unoeste.fipp.projetofciii.services.MusicService;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("apis")
@@ -70,7 +72,8 @@ public class MusicController
                                 System.out.println(e.getMessage());
                             }
                             music.setArquivo(fileName);
-                        return ResponseEntity.ok().body(music);
+                            musicService.addMusica(music);
+                            return ResponseEntity.ok().body(music);
                     }
                 }
             }
@@ -80,9 +83,9 @@ public class MusicController
     @GetMapping("find-musics")
     public ResponseEntity<Object> find_musics(String keyWord)
     {
-        // pedir á camada Service as músicas que satisfazem a música
-        musicService.findMusicsByKeyWord(keyWord);
-        return ResponseEntity.ok("Lista de musicas");
+        List<Music> musicList = new ArrayList<>();
+        musicList = musicService.findMusicsByKeyWord(keyWord);
+        return ResponseEntity.ok(musicList);
     }
 
     @GetMapping("get-music-styles")

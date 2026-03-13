@@ -28,8 +28,8 @@ function cadastrarMusica()
                 feedback.style.display = "block";
                 feedback.innerHTML = `
                     <span class="badge">Erro</span>
-                    <h3>${erro.title || "Falha ao cadastrar"}</h3>
-                    <p>${erro.descricao || "Verifique os dados enviados."}</p>
+                    <h3>${erro.title}</h3>
+                    <p>${erro.descricao}</p>
                 `;
             });
         })

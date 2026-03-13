@@ -40,12 +40,19 @@ public class MusicService
     }
 
     // adicionar as musicas
-    public void addMusica()
+    public void addMusica(Music musica)
     {
+        // acesso ao MongoDB
+        MongoClient mongoClient = MongoClients.create(connectionString);
 
+        // seleciona a database
+        MongoDatabase database = mongoClient.getDatabase("my_musics");
+
+        // seleciona a coleção dessa database
+        MongoCollection<Document> collection = database.getCollection("musics");
+
+        // insere
+        collection.insertOne(Document.parse(new Gson().toJson(musica)));
     }
-
-
-    //
 
 }
