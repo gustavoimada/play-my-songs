@@ -27,7 +27,7 @@
                 <a class="btn btn--secondary cadastro-main__back" href="index.html">Voltar para início</a>
             </div>
 
-            <form class="search-form" onsubmit="pesquisarMusicas(event)">
+            <form class="search-form">
                 <div class="search-form__row">
                     <div class="search-form__group">
                         <label for="palavraChave">Palavra-chave</label>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="search-form__actions">
-                        <button type="submit" class="btn btn--primary search-form__button">
+                        <button type="button" class="btn btn--primary search-form__button" onclick="pesquisarMusicas()">
                             Pesquisar
                         </button>
                     </div>

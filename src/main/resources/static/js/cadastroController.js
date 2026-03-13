@@ -44,13 +44,17 @@ function cadastrarMusica()
 }
 
 // só para ficar mais bonito no front end
-function mostrarNomeArquivo() {
+function mostrarNomeArquivo()
+{
     const input = document.getElementById("file");
     const fileName = document.getElementById("file-name");
 
-    if (input.files && input.files.length > 0) {
+    if (input.files && input.files.length > 0)
+    {
         fileName.textContent = input.files[0].name;
-    } else {
+    }
+    else
+    {
         fileName.textContent = "Nenhum arquivo selecionado";
     }
 }

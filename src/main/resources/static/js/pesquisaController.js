@@ -32,10 +32,17 @@ function pesquisarMusicas()
         .catch(Error=>musicas.innerHTML = Error);
 }*/
 
+// acima tem o código de como se fosse fazer mesmo como fizemos no webFilmes
+// fiz um pouco diferente do que esta acima, mas abaixo tem literalmente a mesma logica
+// só não coloco o resultado em uma tabela, coloco numa div que fica mais bonito pro front
+
 function montarResultados(json) {
     let html = "";
 
-    for (const musica of json) {
+    for (const musica of json)
+    {
+        // usou essa funcao só para substituir espacos/acentos
+        // no nome que iria quebrar a url e bugar dps
         const arquivo = encodeURIComponent(musica.arquivo);
 
         html += `
@@ -61,16 +68,16 @@ function montarResultados(json) {
     return html;
 }
 
-function pesquisarMusicas(event) {
-    event.preventDefault();
-
+function pesquisarMusicas()
+{
     const resultado = document.getElementById("resultado");
     const feedback = document.getElementById("pesquisa-feedback");
     const filtro = document.getElementById("palavraChave").value.trim();
 
     fetch("http://localhost:8080/apis/find-musics?keyWord=" + filtro)
         .then(response => {
-            if (response.status === 200) {
+            if (response.status === 200)
+            {
                 return response.json().then(json => {
                     feedback.style.display = "block";
                     feedback.innerHTML = `
@@ -86,7 +93,8 @@ function pesquisarMusicas(event) {
                                 <p>Tente pesquisar por nome da música, artista ou estilo.</p>
                             </div>
                         `;
-                    } else {
+                    } else
+                    {
                         resultado.innerHTML = montarResultados(json);
                     }
                 });
