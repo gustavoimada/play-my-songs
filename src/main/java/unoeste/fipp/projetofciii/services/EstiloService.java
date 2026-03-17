@@ -3,12 +3,14 @@ package unoeste.fipp.projetofciii.services;
 import com.google.gson.Gson;
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.springframework.stereotype.Service;
 import unoeste.fipp.projetofciii.entities.Estilo;
 import unoeste.fipp.projetofciii.entities.Music;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EstiloService
 {
     String connectionString = "mongodb://localhost:27017";

@@ -20,6 +20,7 @@ public class MusicController
 {
     @Autowired
     private MusicService musicService;
+    @Autowired
     private EstiloService estiloService;
 
     @GetMapping("test")
