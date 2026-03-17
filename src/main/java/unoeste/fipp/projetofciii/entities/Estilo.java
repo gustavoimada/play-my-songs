@@ -2,7 +2,8 @@ package unoeste.fipp.projetofciii.entities;
 
 import org.bson.types.ObjectId;
 
-public class Estilo {
+public class Estilo
+{
     private ObjectId _id;
     private String nome;
     private String descricao;
