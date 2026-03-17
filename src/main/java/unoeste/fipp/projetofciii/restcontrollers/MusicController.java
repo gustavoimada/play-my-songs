@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.projetofciii.entities.Erro;
 import unoeste.fipp.projetofciii.entities.Estilo;
 import unoeste.fipp.projetofciii.entities.Music;
+import unoeste.fipp.projetofciii.services.EstiloService;
 import unoeste.fipp.projetofciii.services.MusicService;
 
 import java.io.File;
@@ -19,6 +20,7 @@ public class MusicController
 {
     @Autowired
     private MusicService musicService;
+    private EstiloService estiloService;
 
     @GetMapping("test")
     public ResponseEntity<Object> teste()
@@ -90,13 +92,13 @@ public class MusicController
     public ResponseEntity<Object> getStyles()
     {
         List<Estilo> estiloList = new ArrayList<>();
-        estiloList = musicService.findStyles();
+        estiloList = estiloService.findStyles();
         return ResponseEntity.ok().body(estiloList);
     }
 
     @GetMapping("random-music")
     public ResponseEntity<Object> musicaDestaque(){
-        Music music = musicService.musicaDestaque();
+        Music music = estiloService.musicaDestaque();
         return ResponseEntity.ok().body(music);
     }
 }
