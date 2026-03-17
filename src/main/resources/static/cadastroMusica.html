@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <script src="js/cadastroController.js" defer></script>
 </head>
-<body>
+<body onload="carregarEstilos()">
 <section class="hero hero--compact">
     <div class="hero__overlay"></div>
 </section>
@@ -42,15 +42,6 @@
                     <div class="music-form__group">
                         <label for="estilo">Estilo musical</label>
                         <select id="estilo" name="estilo" required>
-                            <option value="">Selecione um estilo</option>
-                            <option value="pop">Pop</option>
-                            <option value="rock">Rock</option>
-                            <option value="sertanejo">Sertanejo</option>
-                            <option value="funk">Funk</option>
-                            <option value="rap">Rap</option>
-                            <option value="gospel">Gospel</option>
-                            <option value="mpb">MPB</option>
-                            <option value="eletronica">Eletrônica</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +74,7 @@
                 <ul class="feature-list cadastro-side__list">
                     <li>Use arquivos no formato `.mp3`</li>
                     <li>Preencha nome da música e artista corretamente</li>
-                    <li>Escolha um estilo para facilitar buscas futuras</li>
+                    <li>Escolha um nome para facilitar buscas futuras</li>
                     <li>Após o envio, o sistema retorna o resultado do cadastro</li>
                 </ul>
             </section>

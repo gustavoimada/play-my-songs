@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.mongodb.client.*;
 import com.mongodb.client.internal.MongoClientImpl;
 import org.bson.conversions.Bson;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import unoeste.fipp.projetofciii.entities.Estilo;
 import unoeste.fipp.projetofciii.entities.Music;
 
 import org.bson.Document;
@@ -46,5 +48,40 @@ public class MusicService {
         //acesso ao MongoDB, busca por musica que satisfazem a pesquisa
         //retorno da lista de musica
         return musicList;
+    }
+
+    public void insertBD(Music music){
+        MongoClient mongoClient = MongoClients.create(connectionString);
+        MongoDatabase database = mongoClient.getDatabase("my_musics");
+        MongoCollection<Document> collection = database.getCollection("musics");
+        collection.insertOne(Document.parse(new Gson().toJson(music)));
+    }
+
+
+    public List<Estilo> findStyles(){
+        MongoClient mongoClient = MongoClients.create(connectionString);
+        MongoDatabase database = mongoClient.getDatabase("my_musics");
+        MongoCollection<Document> collection = database.getCollection("estilos");
+        MongoCursor<Document> cursor = collection.find().iterator();
+
+        List<Estilo> estiloList = new ArrayList<>();
+        while(cursor.hasNext()){
+            Estilo estilo = new Gson().fromJson(cursor.next().toJson(), Estilo.class);
+            estiloList.add(estilo);
+        }
+
+        return estiloList;
+    }
+
+    public Music musicaDestaque(){
+        MongoClient mongoClient = MongoClients.create(connectionString);
+        MongoDatabase database = mongoClient.getDatabase("my_musics");
+        MongoCollection<Document> collection = database.getCollection("musics");
+        int total = (int) collection.countDocuments();
+        int pos = (int) (Math.random() * total);
+        MongoCursor<Document> cursor = collection.find().skip(pos).iterator();
+        Music music = new Gson().fromJson(cursor.next().toJson(), Music.class);
+
+        return music;
     }
 }

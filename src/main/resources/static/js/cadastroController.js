@@ -58,3 +58,20 @@ function mostrarNomeArquivo()
         fileName.textContent = "Nenhum arquivo selecionado";
     }
 }
+
+function carregarEstilos(){
+    const select = document.getElementById("estilo")
+    fetch("http://localhost:8080/apis/get-music-styles")
+        .then(res => res.json())
+        .then(estilo => {
+            let opcoes = `<option value="">Selecione um estilo</option>`;
+            estilo.forEach(estilo => {
+                opcoes += `<option value="${estilo.nome}">${estilo.nome}</option>`
+            })
+
+            select.innerHTML = opcoes
+        })
+        .catch(error => {
+            alert("Erro ao carregar os estilos")
+        })
+}

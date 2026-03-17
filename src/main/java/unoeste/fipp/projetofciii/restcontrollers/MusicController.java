@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import unoeste.fipp.projetofciii.entities.Erro;
+import unoeste.fipp.projetofciii.entities.Estilo;
 import unoeste.fipp.projetofciii.entities.Music;
 import unoeste.fipp.projetofciii.services.MusicService;
 
@@ -69,6 +70,7 @@ public class MusicController
                                 System.out.println(e.getMessage());
                             }
                             music.setArquivo(fileName);
+                            musicService.insertBD(music);
                         return ResponseEntity.ok().body(music);
                     }
                 }
@@ -87,7 +89,14 @@ public class MusicController
     @GetMapping("get-music-styles")
     public ResponseEntity<Object> getStyles()
     {
-        //
-        return ResponseEntity.ok("Lista de estilos musicais");
+        List<Estilo> estiloList = new ArrayList<>();
+        estiloList = musicService.findStyles();
+        return ResponseEntity.ok().body(estiloList);
+    }
+
+    @GetMapping("random-music")
+    public ResponseEntity<Object> musicaDestaque(){
+        Music music = musicService.musicaDestaque();
+        return ResponseEntity.ok().body(music);
     }
 }

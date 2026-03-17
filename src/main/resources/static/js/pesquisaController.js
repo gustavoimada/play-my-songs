@@ -74,7 +74,7 @@ function pesquisarMusicas()
     const feedback = document.getElementById("pesquisa-feedback");
     const filtro = document.getElementById("palavraChave").value.trim();
 
-    fetch("http://localhost:8080/apis/find-musics?keyWord=" + filtro)
+    fetch("http://localhost:8080/apis/find-musics?keyword=" + filtro)
         .then(response => {
             if (response.status === 200)
             {
