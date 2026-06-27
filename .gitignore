@@ -1,5 +1,9 @@
 HELP.md
 target/
+Anotações*.txt
+Anotacoes*.txt
+src/main/resources/static/musicas/*
+!src/main/resources/static/musicas/.gitkeep
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

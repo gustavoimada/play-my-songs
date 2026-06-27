@@ -33,31 +33,11 @@ public class MusicController
     public ResponseEntity<Object> music_upload(String nomeMusica, String nomeAutor, String estilo, MultipartFile file)
     {
         final String UPLOAD_FOLDER = "src/main/resources/static/musicas/";
-        if(nomeMusica == null || nomeMusica.isEmpty())
-        {
-            return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","Forneça o nome da Musica"));
-        }
-        else
-        {
-            if(nomeAutor == null || nomeAutor.isEmpty())
-            {
-                return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","Forneça o nome do Artista"));
-            }
-            else
-            {
-                if(estilo == null || estilo.isEmpty())
-                {
-                    return ResponseEntity.badRequest().body(new Erro("Informações incompletas","Forneça o estilo da Música"));
-                }
-                else
-                {
-                    if(file == null || file.isEmpty())
-                    {
-                        return ResponseEntity.badRequest().body(new Erro("Informações incompletas!","O campo do arquivo não foi completado!"));
-                    }
-                    else
-                    {
+
                         Music music = new Music(nomeMusica, nomeAutor, estilo);
+                            nomeMusica = nomeMusica.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+                            nomeAutor = nomeAutor.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
+                            estilo = estilo.toLowerCase().replaceAll("[^a-zA-Z0-9]", "");
                             String fileName = nomeMusica + "_" +  nomeAutor + "_" + estilo+".mp3";
                             try
                             {
@@ -75,10 +55,6 @@ public class MusicController
                             music.setArquivo(fileName);
                             musicService.insertBD(music);
                         return ResponseEntity.ok().body(music);
-                    }
-                }
-            }
-        }
     }
 
     @GetMapping("find-musics")

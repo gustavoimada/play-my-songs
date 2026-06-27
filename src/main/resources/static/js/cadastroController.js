@@ -1,10 +1,58 @@
+function exibirFeedback(tipo, titulo, descricao) {
+    const feedback = document.getElementById("mensagem-feedback");
+
+    feedback.style.display = "block";
+    feedback.scrollIntoView({ behavior: "smooth", block: "center" });
+    feedback.innerHTML = `
+        <span class="badge">${tipo}</span>
+        <h3>${titulo}</h3>
+        <p>${descricao}</p>
+    `;
+}
+
 function cadastrarMusica()
 {
     const formMusica = document.forms[0];
     const feedback = document.getElementById("mensagem-feedback");
     const arquivo = formMusica.elements["file"].files[0];
+    const nomeMusica = formMusica.elements["nomeMusica"].value;
+    const nomeAutor = formMusica.elements["nomeAutor"].value;
+    const estilo = formMusica.elements["estilo"].value
     //tem assim tambem
     //const arquivo = document.getElementById("file").files[0];
+
+    if (nomeMusica === "")
+    {
+        exibirFeedback("Erro", "Nome da música obrigatório", "Informe o nome da música.");
+        return;
+    }
+
+    if (nomeMusica.length < 2 || nomeMusica.length > 80) {
+        exibirFeedback("Erro", "Nome da música inválido", "O nome da música deve ter entre 2 e 80 caracteres.");
+        return;
+    }
+
+
+    if (nomeAutor === "") {
+        exibirFeedback("Erro", "Nome do artista obrigatório", "Informe o nome do artista.");
+        return;
+    }
+
+    if (nomeAutor.length < 2 || nomeAutor.length > 80) {
+        exibirFeedback("Erro", "Nome do artista inválido", "O nome do artista deve ter entre 2 e 80 caracteres.");
+        return;
+    }
+
+    if (estilo === "") {
+        exibirFeedback("Erro", "Estilo obrigatório", "Selecione um estilo musical.");
+        return;
+    }
+
+    if (arquivo == null) {
+        exibirFeedback("Erro", "Arquivo obrigatório", "Selecione o arquivo da música.");
+        return;
+    }
+
     if(arquivo.name.toLowerCase().endsWith(".mp3")  || arquivo.name.toLowerCase().endsWith(".ogg") )
     {
         const requestOptions = {
