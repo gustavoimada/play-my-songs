@@ -171,28 +171,6 @@ src/main/resources/static/musicas/
 
 Essa pasta é ignorada pelo Git para evitar versionar músicas, arquivos pesados ou conteúdos com direitos autorais. O repositório mantém apenas um `.gitkeep` para preservar a estrutura da pasta.
 
-## 🔐 Cuidados de Repositório
-
-Este repositório ignora arquivos gerados e locais, como:
-
-- `target/`
-- `.idea/`
-- `.vscode/`
-- arquivos de áudio enviados;
-- anotações pessoais;
-- arquivos temporários da IDE.
-
-Isso mantém o projeto focado no código-fonte e mais adequado para apresentação em portfólio.
-
 ## 📌 Status do Projeto
 
 Projeto acadêmico funcional, com backend, frontend estático e integração com MongoDB.
-
-## 🔮 Possíveis Melhorias Futuras
-
-- Configurar conexão com MongoDB via `application.properties`.
-- Criar tratamento de erro mais detalhado no backend.
-- Validar tamanho e tipo dos arquivos no servidor.
-- Criar autenticação para cadastro de músicas.
-- Adicionar Docker para subir aplicação e MongoDB juntos.
-- Criar testes automatizados para services e controllers.
