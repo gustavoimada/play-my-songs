@@ -1,2 +1,17 @@
-/mvnw text eol=lf
-*.cmd text eol=crlf
+* text=auto
+
+*.java text eol=lf linguist-language=Java
+*.html text eol=lf linguist-language=HTML
+*.css text eol=lf linguist-language=CSS
+*.js text eol=lf linguist-language=JavaScript
+*.md text eol=lf
+
+src/main/resources/static/** linguist-vendored
+src/main/resources/templates/** linguist-vendored
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.mp3 binary
+*.ogg binary
