@@ -1,5 +1,16 @@
 # 🎧 PlayMySongs
 
+<p align="left">
+  <img src="https://img.shields.io/badge/Status-Completed-brightgreen" />
+  <img src="https://img.shields.io/badge/Language-Java-red" />
+  <img src="https://img.shields.io/badge/Backend-Spring%20Boot-6DB33F" />
+  <img src="https://img.shields.io/badge/API-REST-orange" />
+  <img src="https://img.shields.io/badge/Database-MongoDB-47A248" />
+  <img src="https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue" />
+  <img src="https://img.shields.io/badge/Feature-Audio%20Upload-purple" />
+  <img src="https://img.shields.io/badge/App-Music%20Management-black" />
+</p>
+
 O **PlayMySongs** é uma aplicação web desenvolvida com **Spring Boot** para cadastro, busca e reprodução de músicas.
 
 O projeto permite enviar arquivos de áudio, registrar informações como nome da música, artista e estilo musical, armazenar os dados no **MongoDB** e pesquisar faixas por palavra-chave.
